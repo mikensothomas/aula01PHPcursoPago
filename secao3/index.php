@@ -19,11 +19,11 @@
         <h1>Formulario com PHP</h1>
 
         <p class="erro">* Obrigatório</p>
-        Nome:<input required type="text" name="nome"> <span class="erro">*</span><br><br>
-        E-mail:<input required type="email" name="email"> <span class="erro">*</span><br><br>
-        Website:<input required type="url" name="website"> <span class="erro">*</span><br><br>
-        Comentario:<textarea required name="comentario" rows="3" cols="50"></textarea><br><br>
-        Genero: <input required type="radio" value="masculino" name="genero"> Masculino
+        Nome:<input type="text" name="nome"><span class="erro">*</span><br><br>
+        E-mail:<input type="email" name="email"><span class="erro">*</span><br><br>
+        Website:<input type="url" name="website"><span class="erro">*</span><br><br>
+        Comentario:<textarea name="comentario" rows="3" cols="50"></textarea><br><br>
+        Genero: <input type="radio" value="masculino" name="genero"> Masculino
         <input type="radio" value="feminino" name="genero"> Feminino
         <input type="radio" value="outro" name="genero"> Outro <br><br>
         <button name="enviar" type="submit">Enviar</button>
@@ -31,6 +31,21 @@
 
         <?php
         if (isset($_POST['enviar'])) {
+
+            if (empty($_POST['nome']) || strlen($_POST['nome'] < 2)) {
+                echo '<p class = "erro">Preencha o campo nome </p>';
+                die();
+            }
+
+            if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                echo '<p class = "erro">Preencha o campo email </p>';
+                die();
+            }
+
+            if (empty($_POST['website']) || !filter_var($_POST['website'], FILTER_VALIDATE_URL)) {
+                echo '<p class = "erro">Preencha o campo website </p>';
+                die();
+            }
 
             $genero = "Não selecionado";
 

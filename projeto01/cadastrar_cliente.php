@@ -36,7 +36,7 @@ if (count($_POST) > 0) {
     if (!empty($telefone)) {
         $telefone = limpar_texto($telefone);
         if (strlen($telefone) != 11) {
-            $erro = "O telefone deve ser preencido no padrao: (11) 9 8417-7437";
+            $erro = "O telefone deve ser preencido no padrao: (49) 9 8417-7437";
         }
     }
 
@@ -44,7 +44,7 @@ if (count($_POST) > 0) {
         echo "<p><b>ERRO: $erro</b></p>";
     } else {
         $sql_code = "INSERT INTO clientes(nome, email, telefone, data_nascimento)
-        VALUES('$nome', '$email', '$telefone', '$data_nascimento')";
+            VALUES('$nome', '$email', '$telefone', '$data_nascimento')";
         $deu_certo = $mysqli->query($sql_code) or die($mysqli->error);
         if ($deu_certo) {
             echo "<p><b>cliente cadastrado com sucesso!</b></p>";

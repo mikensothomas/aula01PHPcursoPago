@@ -34,19 +34,35 @@ $num_clientes = $query_clientes->num_rows;
             <tr>
                 <td colpan="7">Nenhum cliente foi cadastrado</td>
             </tr>
-            <?php } else {
+            <?php
+            } else {
+
                 while ($cliente = $query_clientes->fetch_assoc()) {
+
+                    $telefone = "Não informa";
+                    if (!empty($cliente['telefone'])) {
+                        $ddd = substr($cliente['telefone'], 0, 2);
+                        $parte1 = substr($cliente['telefone'], 2, 5);
+                        $parte2 = substr($cliente['telefone'], 7);
+                        $telefone = "($ddd) $parte1-$parte2";
+                    }
+                    $nascimento = "Não informada";
+                    if (!empty($cliente['data_nascimento'])) {
+                        $nascimento = implode('/', array_reverse(explode('-', $cliente['data_nascimento'])));
+                    }
+
+                    $data_cadastro = date("d/m/y H:i", strtotime($cliente['data_cadastro']));
                 ?>
             <tr>
                 <td><?php echo $cliente['id']; ?></td>
                 <td><?php echo $cliente['nome']; ?></td>
                 <td><?php echo $cliente['email']; ?></td>
-                <td><?php echo $cliente['telefone']; ?></td>
-                <td><?php echo $cliente['data_nascimento']; ?></td>
+                <td><?php echo $telefone; ?></td>
+                <td><?php echo $nascimento; ?></td>
                 <td><?php echo $cliente['data_cadastro']; ?></td>
                 <td>
-                    <a href="">Editar</a>
-                    <a href="">Deletar</a>
+                    <a href="cadastra_cliente.php?id=<?php echo $cliente['id']; ?>">Editar</a>
+                    <a href="editar_cliente.php?id=<?php echo $cliente['id']; ?>">Deletar</a>
                 </td>
             </tr>
             <?php

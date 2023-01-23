@@ -86,7 +86,7 @@ if (count($_POST) > 0) {
                 name="data_nascimento">
         </p>
         <p>
-            <label>Data:</label>
+            <label>Data Compra:</label>
             <input value="<?php if (isset($_POST['data_cadastro']))  echo $_POST['data'] ?>" type="text" name="data">
         </p>
         <p>

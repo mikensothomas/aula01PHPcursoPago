@@ -15,6 +15,7 @@ if (count($_POST) > 0) {
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
     $data_nascimento = $_POST['data_nascimento'];
+    $data = $_POST['data'];
 
     if (empty($nome)) {
         $erro = "Preencha o campo nome";
@@ -85,9 +86,15 @@ if (count($_POST) > 0) {
                 name="data_nascimento">
         </p>
         <p>
+            <label>Data:</label>
+            <input value="<?php if (isset($_POST['data_cadastro']))  echo $_POST['data'] ?>" type="text" name="data">
+        </p>
+        <p>
             <button type="submit">Salvar cliente</button>
         </p>
     </form>
 </body>
+
+</html>
 
 </html>

@@ -13,7 +13,7 @@ if (count($_POST) > 0) {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
-    $nascimento = $_POST['nascimento'];
+    $nascimento = $_POST['data_nascimento'];
 
     if (empty($nome)) {
         $erro = "Preencha o nome";
@@ -44,7 +44,7 @@ if (count($_POST) > 0) {
         SET nome = '$nome', 
         email = '$email', 
         telefone = '$telefone',
-        nascimento = '$nascimento'
+        data_nascimento = '$nascimento'
         WHERE id = '$id'";
         $deu_certo = $mysqli->query($sql_code) or die($mysqli->error);
         if ($deu_certo) {
@@ -86,8 +86,9 @@ $cliente = $query_cliente->fetch_assoc();
         </p>
         <p>
             <label>Data de Nascimento:</label>
-            <input value="<?php if (!empty($cliente['nascimento'])) echo formatar_data($cliente['nascimento']); ?>"
-                name="nascimento" type="text">
+            <input
+                value="<?php if (!empty($cliente['data_nascimento'])) echo formatar_data($cliente['data_nascimento']); ?>"
+                name="data_nascimento" type="text">
         </p>
         <p>
             <button type="submit">Salvar Cliente</button>

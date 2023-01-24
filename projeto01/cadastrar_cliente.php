@@ -13,7 +13,7 @@ if (count($_POST) > 0) {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
-    $nascimento = $_POST['nascimento'];
+    $nascimento = $_POST['data_nascimento'];
 
     if (empty($nome)) {
         $erro = "Preencha o nome";
@@ -40,7 +40,7 @@ if (count($_POST) > 0) {
     if ($erro) {
         echo "<p><b>ERRO: $erro</b></p>";
     } else {
-        $sql_code = "INSERT INTO clientes (nome, email, telefone, nascimento, data) 
+        $sql_code = "INSERT INTO clientes (nome, email, telefone, data_nascimento, data_cadastro) 
         VALUES ('$nome', '$email', '$telefone', '$nascimento', NOW())";
         $deu_certo = $mysqli->query($sql_code) or die($mysqli->error);
         if ($deu_certo) {
@@ -74,11 +74,13 @@ if (count($_POST) > 0) {
         </p>
         <p>
             <label>Telefone:</label>
-            <input value="<?php if (isset($_POST['telefone'])) echo $_POST['telefone']; ?>" placeholder="(11) 98888-8888" name="telefone" type="text">
+            <input value="<?php if (isset($_POST['telefone'])) echo $_POST['telefone']; ?>"
+                placeholder="(11) 98888-8888" name="telefone" type="text">
         </p>
         <p>
             <label>Data de Nascimento:</label>
-            <input value="<?php if (isset($_POST['nascimento'])) echo $_POST['nascimento']; ?>" name="nascimento" type="text">
+            <input value="<?php if (isset($_POST['data_nascimento'])) echo $_POST['data_nascimento']; ?>"
+                name="data_nascimento" type="text">
         </p>
         <p>
             <button type="submit">Salvar Cliente</button>

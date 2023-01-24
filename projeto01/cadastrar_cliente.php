@@ -10,87 +10,78 @@ if (count($_POST) > 0) {
     include('conexao.php');
 
     $erro = false;
-
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
-    $data_nascimento = $_POST['data_nascimento'];
-    $data = $_POST['data'];
+    $nascimento = $_POST['nascimento'];
 
     if (empty($nome)) {
-        $erro = "Preencha o campo nome";
+        $erro = "Preencha o nome";
     }
-
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erro = "Preencha o campo email";
+        $erro = "Preencha o e-mail";
     }
 
-    if (!empty($data_nascimento)) {
-        $pedacoes = explode('/', $data_nascimento);
-        if (count($pedacoes) == 3) {
-            $data_nascimento = implode('-', array_reverse($pedacoes));
+    if (!empty($nascimento)) {
+        $pedacos = explode('/', $nascimento);
+        if (count($pedacos) == 3) {
+            $nascimento = implode('-', array_reverse($pedacos));
         } else {
-            $erro = "A data deve seguir o padrão dia/mes/ano";
+            $erro = "A data de nascimento deve seguir o padrão dia/mes/ano.";
         }
     }
 
     if (!empty($telefone)) {
         $telefone = limpar_texto($telefone);
-        if (strlen($telefone) != 11) {
-            $erro = "O telefone deve ser preencido no padrao: (49) 9 8417-7437";
-        }
+        if (strlen($telefone) != 11)
+            $erro = "O telefone deve ser preenchido no padrão (11) 98888-8888";
     }
 
     if ($erro) {
         echo "<p><b>ERRO: $erro</b></p>";
     } else {
-        $sql_code = "INSERT INTO clientes(nome, email, telefone, data_nascimento)
-            VALUES('$nome', '$email', '$telefone', '$data_nascimento')";
+        $sql_code = "INSERT INTO clientes (nome, email, telefone, nascimento, data) 
+        VALUES ('$nome', '$email', '$telefone', '$nascimento', NOW())";
         $deu_certo = $mysqli->query($sql_code) or die($mysqli->error);
         if ($deu_certo) {
-            echo "<p><b>cliente cadastrado com sucesso!</b></p>";
+            echo "<p><b>Cliente cadastrado com sucesso!!!</b></p>";
             unset($_POST);
         }
     }
 }
-?>
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastrar Cliente</title>
 </head>
 
 <body>
-    <a href="/clientes.phph">volta para a lista</a>
-    <form action="" method="POST">
+    <a href="clientes.php">Voltar para a lista</a>
+    <form method="POST" action="">
         <p>
             <label>Nome:</label>
-            <input value="<?php if (isset($_POST['nome']))  echo $_POST['nome'] ?>" type="text" name="nome">
+            <input value="<?php if (isset($_POST['nome'])) echo $_POST['nome']; ?>" name="nome" type="text">
         </p>
         <p>
             <label>E-mail:</label>
-            <input value="<?php if (isset($_POST['email']))  echo $_POST['email'] ?>" type="text" name="email">
+            <input value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" name="email" type="text">
         </p>
         <p>
             <label>Telefone:</label>
-            <input value="<?php if (isset($_POST['telefone']))  echo $_POST['telefone'] ?>" type="text" name="telefone">
+            <input value="<?php if (isset($_POST['telefone'])) echo $_POST['telefone']; ?>" placeholder="(11) 98888-8888" name="telefone" type="text">
         </p>
         <p>
-            <label>Nascimento:</label>
-            <input value="<?php if (isset($_POST['data_nascimento']))  echo $_POST['data_nascimento'] ?>" type="text"
-                name="data_nascimento">
+            <label>Data de Nascimento:</label>
+            <input value="<?php if (isset($_POST['nascimento'])) echo $_POST['nascimento']; ?>" name="nascimento" type="text">
         </p>
         <p>
-            <label>Data Compra:</label>
-            <input value="<?php if (isset($_POST['data_cadastro']))  echo $_POST['data'] ?>" type="text" name="data">
-        </p>
-        <p>
-            <button type="submit">Salvar cliente</button>
+            <button type="submit">Salvar Cliente</button>
         </p>
     </form>
 </body>

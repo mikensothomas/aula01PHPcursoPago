@@ -8,7 +8,7 @@ if (isset($_POST['confirmar'])) {
 
     if ($sql_query) { ?>
 <h1>Cliente deletado com sucesso!</h1>
-<p><a href="clientes.php">Clique aqui</a> para voltar para a lista de clientes.</p>
+<p><a href="read_clientes.php">Clique aqui</a> para voltar para a lista de clientes.</p>
 <?php
         die();
     }
@@ -27,7 +27,7 @@ if (isset($_POST['confirmar'])) {
     <h1>Tem certeza que deseja deletar este cliente?</h1>
 
     <form action="" method="post">
-        <a style="margin-right:40px;" href="clientes.php">Não</a>
+        <a style="margin-right:40px;" href="read_clientes.php">Não</a>
         <button name="confirmar" value="1" type="submit">Sim</button>
     </form>
 </body>

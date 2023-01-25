@@ -38,7 +38,7 @@ if (count($_POST) > 0) {
     }
 
     if ($erro) {
-        echo "<p><b>ERRO: $erro</b></p>";
+        echo "<p><b>ERRO:$erro</b></p>";
     } else {
         $sql_code = "INSERT INTO clientes (nome, email, telefone, data_nascimento, data_cadastro) 
         VALUES ('$nome', '$email', '$telefone', '$nascimento', NOW())";

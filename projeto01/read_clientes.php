@@ -29,7 +29,9 @@ $num_clientes = $query_clientes->num_rows;
             <th>Ações</th>
         </thead>
         <tbody>
-            <?php if ($num_clientes == 0) { ?>
+            <?php
+            if ($num_clientes == 0) {
+            ?>
             <tr>
                 <td colspan="7">Nenhum cliente foi cadastrado</td>
             </tr>

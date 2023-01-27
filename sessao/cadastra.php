@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION))
+    session_start();
+if (!isset($_SESSION['usuario']))
+    die('"Você não está logado. <a href="login.php">Clique aqui</a> para logar"');
+
 if (isset($_POST['email'])) {
 
     include('conexao.php');
@@ -29,6 +34,7 @@ if (isset($_POST['email'])) {
         <input type="text" name="senha"><br><br>
         <button type="submit">Cadastrar senha</button>
     </form>
+    <a href="logout.php">Sair</a>
 </body>
 
 </html>

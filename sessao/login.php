@@ -12,7 +12,10 @@ if (isset($_POST['email'])) {
 
     $usuario = $sql_exec->fetch_assoc();
     if (password_verify($senha, $usuario['senha'])) {
-        echo "Usuario logado com sucesso!";
+        if (!isset($_SESSION))
+            session_start();
+        $_SESSION['usuario'] = $usuario['id'];
+        header("Location: cadastra.php");
     } else {
         echo "Email ou senha inválido!";
     }

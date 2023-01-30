@@ -14,7 +14,7 @@ require 'vendor/autoload.php';
 
 $mail = new PHPMailer;
 $mail->isSMTP();
-$mail = SMTPDebug = 2;
+$mail->SMTPDebug = 2;
 $mail->Host = 'smtp.gmail.com';
 $mail->Port = 465;
 $mail->SMTPAuth = true;
@@ -23,7 +23,7 @@ $mail->Password = '17011994yeyeye';
 $mail->setFrom('mikensonthomas0@gmail.com', "Teste Zero Bugs");
 $mail->addAddress('mikensonthomas2@gmail.com');
 $mail->Subject = 'Mikenson Thomas';
-$mail->msHTML(",h1>Email enviado com sucesso</h1>");
+$mail->msgHTML(",h1>Email enviado com sucesso</h1>");
 $mail->Body = "Invitacao";
 
 if ($email->send()) {

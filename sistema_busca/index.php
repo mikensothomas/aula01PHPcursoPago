@@ -15,7 +15,8 @@ include("conexao.php");
 <body>
     <h1>Lista de vehiculos</h1>
     <form action="" method="$_GET">
-        <input type="text" name="busca" placeholder="Digita os tema de pesquisa">
+        <input type="text" value="<?php if (isset($_GET['busca'])) echo $_GET['busca'] ?>" name="busca"
+            placeholder="Digita os tema de pesquisa">
         <button type="submit">Pesquisa</button>
     </form>
     <br>
